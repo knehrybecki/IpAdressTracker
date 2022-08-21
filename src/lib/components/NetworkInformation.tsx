@@ -1,7 +1,7 @@
 import { IpTrackerState } from 'features/ipTracker/types'
 import { useTranslations } from 'lib/hooks'
-import { Regular, SubTitle } from './Typography'
 import styled from 'styled-components'
+import { Regular, SubTitle } from './Typography'
 
 type NetworkInformationProps = {
 	ipTracker: IpTrackerState
@@ -10,9 +10,12 @@ type NetworkInformationProps = {
 	children: React.ReactNode
 }
 
-export const NetworkInformation: React.FunctionComponent<
-	NetworkInformationProps
-> = ({ children, ipTracker, loading, error }) => {
+export const NetworkInformation: React.FunctionComponent<NetworkInformationProps> = ({
+	children,
+	ipTracker,
+	loading,
+	error,
+}) => {
 	const T = useTranslations()
 	const { ip, location, isp } = ipTracker
 
@@ -38,9 +41,7 @@ export const NetworkInformation: React.FunctionComponent<
 				<Info>
 					<SubTitle>{T.networkInfo.timezone}</SubTitle>
 					<Regular>
-						{loading || error
-							? T.networkInfo.empty
-							: `${T.networkInfo.utc}${location.timezone}`}
+						{loading || error ? T.networkInfo.empty : `${T.networkInfo.utc} ${location.timezone}`}
 					</Regular>
 				</Info>
 				<Info>

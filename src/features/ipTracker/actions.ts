@@ -1,5 +1,5 @@
-import { API_CONFIG, APP_CONFIG } from 'lib/config'
 import { format } from 'date-fns'
+import { API_CONFIG, APP_CONFIG } from 'lib/config'
 import { NetworkInformationResponse } from './types'
 
 export const checkIP = (

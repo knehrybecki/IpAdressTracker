@@ -10,8 +10,8 @@ export type NetworkInformationResponse = {
 	district: string
 	city: string
 	zipcode: string
-	latitude: string
-	longitude: string
+	latitude: number
+	longitude: number
 	is_eu: boolean
 	calling_code: string
 	country_tld: string
@@ -38,8 +38,8 @@ export type location = {
 	country: string
 	region: string
 	city: string
-	lat: string
-	lng: string
+	lat: number
+	lng: number
 	postalCode: string
 	timezone: string
 }
@@ -48,4 +48,9 @@ export type IpTrackerState = {
 	isp: string
 	location: location
 	ip: string
+}
+
+export type PositionMap = {
+	lat: number
+	lng: number
 }

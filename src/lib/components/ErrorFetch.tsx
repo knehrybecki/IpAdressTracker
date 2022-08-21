@@ -1,26 +1,28 @@
 import { useTranslations } from 'lib/hooks'
-import { Dimmer } from 'semantic-ui-react'
-import styled from 'styled-components'
 import 'semantic-ui-css/semantic.min.css'
+import styled from 'styled-components'
 
 export const ErrorFetch = () => {
 	const T = useTranslations()
 
 	return (
-		<ContainerDimmer
-			active 
-			inverted
-		>
-			<ErrorMessage>{T.components.app.error}</ErrorMessage>
-		</ContainerDimmer>
+		<ContainerError>
+			<Message>{T.components.app.error}</Message>
+		</ContainerError>
 	)
 }
-
-const ContainerDimmer = styled(Dimmer)`
-	border-radius: '15px';
+const ContainerError = styled.div`
+	width: 100%;
+	height: 100%;
+	border-radius: 15px;
+	background-color: rgba(255, 255, 255, 0.85);
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 `
-
-const ErrorMessage = styled.div`
-	color: '#ff0000';
-	font-size: '20px';
+const Message = styled.div`
+	color: ${({ theme }) => theme.colors.error};
+	font-size: 20px;
 `

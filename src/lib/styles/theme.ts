@@ -4,6 +4,7 @@ export const theme = {
     SUBTEXT_TITLE: '#969696',
     BUTTON: '#2b2b2b',
     INFOBOX_BACKGROUND: '#fff',
+    error: '#ff0000',
   },
   typography: {
     colors: {

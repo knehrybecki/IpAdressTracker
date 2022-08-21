@@ -1,13 +1,7 @@
+import { ErrorFetch, Header, LoaderFetch, Maps, NetworkInformation } from 'lib/components'
 import { useEffect } from 'react'
-import { useIpTracker } from './useIpTracker'
 import { checkIP } from './actions'
-import {
-	ErrorFetch,
-	Header,
-	LoaderFetch,
-	Maps,
-	NetworkInformation,
-} from 'lib/components'
+import { useIpTracker } from './useIpTracker'
 
 export const ScreenIpTracker = () => {
 	const {
@@ -24,9 +18,9 @@ export const ScreenIpTracker = () => {
 		setLoading,
 	} = useIpTracker()
 
-	const fetchCheckIp = () => {
-		checkIP(ipTracker.ip, setHasError, setLoading).then(
-			res => {
+	const fetchCheckIp = async () => {
+		await checkIP(ipTracker.ip, setHasError, setLoading)
+			.then(res => {
 				setIpFromInput(res.ip)
 				setIpTracker({
 					ip: res.ip,
@@ -37,8 +31,12 @@ export const ScreenIpTracker = () => {
 					lat: res.location.lat,
 					lng: res.location.lng,
 				})
-			}
-		)
+			})
+			.catch(() => {
+				setHasError(true)
+
+				throw new Error('Error while fetching data from API')
+			})
 	}
 
 	useEffect(() => {
@@ -55,17 +53,13 @@ export const ScreenIpTracker = () => {
 				onClick={() =>
 					setIpTracker({
 						ip: ipFromInput,
-						location: positionOnMap,
+						location: ipTracker.location,
 						isp: ipTracker.isp,
 					})
 				}
-				ipInput={setIpFromInput}
+				setIpFromInput={setIpFromInput}
 			/>
-			<NetworkInformation
-				ipTracker={ipTracker}
-				loading={loading}
-				error={error}
-			>
+			<NetworkInformation ipTracker={ipTracker} loading={loading} error={error}>
 				{loading && <LoaderFetch />}
 				{error && <ErrorFetch />}
 			</NetworkInformation>

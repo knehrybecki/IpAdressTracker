@@ -1,18 +1,15 @@
-import { useTranslations } from 'lib/hooks'
-import { Title } from './Typography'
 import { Images } from 'assets'
+import { useTranslations } from 'lib/hooks'
 import { IoChevronForward } from 'react-icons/io5'
 import styled from 'styled-components'
+import { Title } from './Typography'
 
 type HeaderProps = {
-	onClick: () => void
-	ipInput: (value: string) => void
+	onClick: VoidFunction
+	setIpFromInput: (ip: string) => void
 }
 
-export const Header: React.FunctionComponent<HeaderProps> = ({
-	ipInput,
-	onClick,
-}) => {
+export const Header: React.FunctionComponent<HeaderProps> = ({ setIpFromInput, onClick }) => {
 	const T = useTranslations()
 
 	return (
@@ -22,7 +19,7 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
 				<Input
 					type='text'
 					placeholder={T.components.input.placeholder}
-					onChange={event => ipInput(event.target.value)}
+					onChange={event => setIpFromInput(event.target.value)}
 				/>
 				<Button onClick={() => onClick()}>
 					<Icon />

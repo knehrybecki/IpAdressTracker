@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { API_CONFIG } from 'lib/config'
-import { location } from 'features/ipTracker'
 import axios from 'axios'
-import { IpTrackerState } from './types'
+import { location } from 'features/ipTracker'
+import { API_CONFIG } from 'lib/config'
+import { useState } from 'react'
+import { IpTrackerState, PositionMap } from './types'
 
 export const useIpTracker = () => {
 	const [ipTracker, setIpTracker] = useState<IpTrackerState>({
@@ -10,7 +10,7 @@ export const useIpTracker = () => {
 		location: {} as location,
 		isp: '',
 	})
-	const [positionOnMap, setPositionOnMap] = useState<any>({
+	const [positionOnMap, setPositionOnMap] = useState<PositionMap>({
 		lat: 20,
 		lng: 30,
 	})

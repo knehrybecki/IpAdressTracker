@@ -1,16 +1,15 @@
-import styled, { ThemeProvider } from 'styled-components'
-import { theme } from 'lib/styles'
 import { ScreenIpTracker } from 'features/ipTracker'
+import { theme } from 'lib/styles'
+import styled, { ThemeProvider } from 'styled-components'
 
-export const App = () => {
-	return (
-		<ThemeProvider theme={theme}>
-			<Container>
-				<ScreenIpTracker />
-			</Container>
-		</ThemeProvider>
-	)
-}
+export const App = () => (
+	<ThemeProvider theme={theme}>
+		<Container>
+			<ScreenIpTracker />
+		</Container>
+	</ThemeProvider>
+)
+
 const Container = styled.div`
 	display: flex;
 	justify-content: space-between;

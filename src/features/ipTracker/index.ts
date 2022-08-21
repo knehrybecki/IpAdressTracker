@@ -3,4 +3,5 @@ export { ScreenIpTracker } from './ScreenIpTracker'
 export type {
   location,
   NetworkInformationResponse,
+  PositionMap
 } from './types'
