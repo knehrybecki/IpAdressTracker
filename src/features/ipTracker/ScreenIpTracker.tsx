@@ -1,76 +1,75 @@
-import {
-  ErrorFetch,
-  Header,
-  LoaderFetch,
-  Maps,
-  NetworkInformation,
-} from 'lib/components'
 import { useEffect } from 'react'
-import { checkIP } from './actions'
 import { useIpTracker } from './useIpTracker'
+import { checkIP } from './actions'
+import {
+	ErrorFetch,
+	Header,
+	LoaderFetch,
+	Maps,
+	NetworkInformation,
+} from 'lib/components'
 
 export const ScreenIpTracker = () => {
-  const {
-    isp,
-    location,
-    setisp,
-    setlocation,
-    setIpFromInput,
-    ipFromInput,
-    setLat,
-    setLng,
-    lat,
-    lng,
-    ipAdress,
-    setIpAdress,
-    getUserIp,
-    setHasError,
-    error,
-    loading,
-    setLoading,
-  } = useIpTracker()
+	const {
+		setIpFromInput,
+		ipFromInput,
+		positionOnMap,
+		setPositionOnMap,
+		ipTracker,
+		setIpTracker,
+		getUserIp,
+		setHasError,
+		error,
+		loading,
+		setLoading,
+	} = useIpTracker()
 
-  const fetchCheckIp = async () => {
-    const { ip, isp, location } = await checkIP(
-      ipAdress,
-      setHasError,
-      setLoading
-    )
-    const { lat, lng } = location
+	const fetchCheckIp = () => {
+		checkIP(ipTracker.ip, setHasError, setLoading).then(
+			res => {
+				setIpFromInput(res.ip)
+				setIpTracker({
+					ip: res.ip,
+					location: res.location,
+					isp: res.isp,
+				})
+				setPositionOnMap({
+					lat: res.location.lat,
+					lng: res.location.lng,
+				})
+			}
+		)
+	}
 
-    setIpAdress(ip)
-    setisp(isp)
-    setlocation(location)
-    setLng(lng)
-    setLat(lat)
-  }
+	useEffect(() => {
+		getUserIp()
+	}, [])
 
-  useEffect(() => {
-    getUserIp()
-  }, [])
+	useEffect(() => {
+		fetchCheckIp()
+	}, [ipTracker.ip])
 
-  useEffect(() => {
-    fetchCheckIp()
-  }, [ipAdress])
-
-  return (
-    <>
-      <Header
-        onClick={() => {
-          setIpAdress(ipFromInput)
-        }}
-        ipInput={setIpFromInput}
-      />
-      <NetworkInformation
-        ipAdress={ipAdress}
-        isp={isp}
-        location={location}
-        loading={loading}
-        error={error}>
-        {loading && <LoaderFetch />}
-        {error && <ErrorFetch />}
-      </NetworkInformation>
-      <Maps lng={lng} lat={lat} />
-    </>
-  )
+	return (
+		<>
+			<Header
+				onClick={() =>
+					setIpTracker({
+						ip: ipFromInput,
+						location: positionOnMap,
+						isp: ipTracker.isp,
+					})
+				}
+				ipInput={setIpFromInput}
+			/>
+			<NetworkInformation
+				ipTracker={ipTracker}
+				loading={loading}
+				error={error}
+			>
+				{loading && <LoaderFetch />}
+				{error && <ErrorFetch />}
+			</NetworkInformation>
+			<Maps positionOnMap={positionOnMap} />
+		</>
+	)
 }

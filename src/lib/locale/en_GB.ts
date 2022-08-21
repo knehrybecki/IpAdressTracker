@@ -1,4 +1,4 @@
-import { Dictionary } from 'lib/types/locale'
+import { Dictionary } from 'lib/types'
 
 export const en_GB: Dictionary = {
   components: {
@@ -9,6 +9,9 @@ export const en_GB: Dictionary = {
     header: {
       title: 'IP Adress Tracker',
     },
+    input:{
+      placeholder: 'Enter an IP address',
+    },
   },
   networkInfo: {
     ip: 'IP ADDRESS',
@@ -16,5 +19,6 @@ export const en_GB: Dictionary = {
     timezone: 'TIMEZONE',
     isp: 'ISP',
     utc: "UTC",
+    empty: '---'
   },
 }

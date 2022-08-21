@@ -1,5 +1,5 @@
-import { en_GB } from 'lib/locale/en_GB'
+import { en_GB } from 'lib/locale'
 
 export const useTranslations = () => {
-  return en_GB
+	return en_GB
 }
