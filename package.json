@@ -2,11 +2,14 @@
   "name": "ip-address-tracker",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://knehrybecki.github.io/IpAdressTracker/",
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.dev.config.ts",
     "build": "tsc && vite build --config vite.prod.config.ts",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "axios": "^0.27.2",
